@@ -1,0 +1,27 @@
+data-sources:
+  - name: database-1
+    strategy: postgres
+    url: jdbc:postgresql://localhost:5433/postgres
+    table: users
+    user: postgres
+    password: password
+    mapping:
+      id: user_id
+      username: login
+      name: first_name
+      surname: last_name
+  - name: database-2
+    strategy: mysql
+    url: jdbc:mysql://localhost:3306/user_db
+    table: user_table
+    user: user
+    password: password
+    mapping:
+      id: ldap_login
+      username: ldap_login
+      name: name
+      surname: surname
+
+springdoc:
+  api-docs:
+    path: /api-docs
