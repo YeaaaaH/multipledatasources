@@ -1,6 +1,7 @@
 package com.comparus.multipledatasource.config;
 
 import com.comparus.multipledatasource.model.DBProperties;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.jdbc.DataSourceBuilder;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -10,6 +11,7 @@ import javax.sql.DataSource;
 import java.util.Map;
 import java.util.stream.Collectors;
 
+@Slf4j
 @Configuration
 public class DataSourceConfig {
     public static final String MY_SQL = "mysql";
@@ -37,6 +39,7 @@ public class DataSourceConfig {
     }
 
     private DataSource initDataSource(DBProperties dbProperties) {
+        log.info("dbProperties init data : {}", dbProperties);
         return DataSourceBuilder.create()
                 .driverClassName(DRIVERS_MAP.get(dbProperties.getStrategy()))
                 .url(dbProperties.getUrl())

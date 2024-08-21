@@ -1,7 +1,7 @@
 data-sources:
   - name: database-1
     strategy: postgres
-    url: jdbc:postgresql://localhost:5433/postgres
+    url: jdbc:postgresql://postgres-container:5432/postgres_db
     table: users
     user: postgres
     password: password
@@ -12,7 +12,7 @@ data-sources:
       surname: last_name
   - name: database-2
     strategy: mysql
-    url: jdbc:mysql://localhost:3306/user_db
+    url: jdbc:mysql://mysql-container:3306/mysql_db
     table: user_table
     user: user
     password: password

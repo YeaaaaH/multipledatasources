@@ -1,8 +1,3 @@
 FROM openjdk:17
-
-ARG JAR_FILE=target/*.jar
-COPY ${JAR_FILE} multipledbapp.jar
-
-EXPOSE 8080
-
-ENTRYPOINT ["java", "-jar", "/multipledbapp.jar"]
+COPY target/multipledatasource-0.0.1-SNAPSHOT.jar multipledbapp.jar
+ENTRYPOINT ["java","-jar", "/multipledbapp.jar"]

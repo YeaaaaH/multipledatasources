@@ -1,26 +1,41 @@
 version: '3.8'
 
 services:
-  pgdb:
+  postgres:
     image: postgres:15.8
+    container_name: postgres-container
     ports:
       - "5433:5432"
     environment:
+      POSTGRES_DB: postgres_db
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: password
-      POSTGRES_DB: postgres
     restart: always
     volumes:
       - "./postgres.sql:/docker-entrypoint-initdb.d/init.sql"
+      - postgres-volume:/var/lib/postgresql/data
   mysql:
-    image: mysql:9.0.1
+    image: mysql:8.3.0
+    container_name: mysql-container
     ports:
       - "3306:3306"
     environment:
-      MYSQL_DATABASE: user_db
+      MYSQL_DATABASE: mysql_db
       MYSQL_USER: user
       MYSQL_PASSWORD: password
       MYSQL_ALLOW_EMPTY_PASSWORD: true
     restart: always
     volumes:
       - "./mysql.sql:/docker-entrypoint-initdb.d/init.sql"
+      - mysql-volume:/var/lib/postgresql/data
+  multipledbapp:
+    build: .
+    container_name: multipledbapp
+    ports:
+      - "8080:8080"
+    depends_on:
+      - postgres
+      - mysql
+volumes:
+  postgres-volume:
+  mysql-volume:
